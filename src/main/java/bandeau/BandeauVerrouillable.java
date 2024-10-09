@@ -1,9 +1,20 @@
 package bandeau;
 
 public class BandeauVerrouillable extends Bandeau implements Runnable {
+    private final Object lock = new Object();
+    private boolean isPlaying = false;
+
+
     @Override
     public void run() {
-        synchronized (this) {
+
+        synchronized (lock) {
+            if(isPlaying){
+                return;
+            }
+            isPlaying = true;
+        }
+        try {
             String message = "Démonstration du bandeau";
 
             Scenario s = new Scenario();
@@ -16,6 +27,11 @@ public class BandeauVerrouillable extends Bandeau implements Runnable {
             s.addEffect(new Rotate("2 tours à droite", 180, 400, true), 2);
 
             s.playOn(this);
+        }
+        finally {
+            synchronized (lock) {
+                isPlaying = false;
+            }
         }
     }
 }

@@ -26,18 +26,21 @@ public class ExempleDeScenario {
         s.addEffect(new FontEnumerator(10), 1);
         s.addEffect(new Rainbow("Comme c'est joli !", 30), 1);
         s.addEffect(new Rotate("2 tours à droite", 180, 400, true), 2);
-        
+
         // On cree les bandeaux
         BandeauVerrouillable b1 = new BandeauVerrouillable();
         BandeauVerrouillable b2 = new BandeauVerrouillable();
-        //Bandeau b3 = new Bandeau();
+        //BandeauVerrouillable b3 = new BandeauVerrouillable();
+
         Thread t1 = new Thread(b1);
         Thread t2 = new Thread(b2);
+        //Thread t3 = new Thread(b3);
 
         System.out.println("CTRL+C pour terminer le programme");
 
         t1.start();
         t2.start();
+        //t3.start();
         
         // On ne doit pas pouvoir changer un scénario quand il est en train de se jouer
         try {
